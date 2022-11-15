@@ -1,101 +1,86 @@
+// ASSIGNMENT NO - 1
+// NAME - YASH JITENDRA CHINCHOLE
+// ROLL NO - SYCOA37
+
 #include <bits/stdc++.h>
 using namespace std;
 
-class Bank
+class bankdata
 {
+    int accno;
+    string name, type;
+    float balance;
+
 public:
-    int bal, accn;
-    string name;
-
-    void read();
-    void display();
-    void getacc();
-    void deposite();
-    void withdraw();
+    bankdata() {}
+    bankdata(int a, string b, string c, float d)
+    {
+        accno = a;
+        name = b;
+        type = c;
+        balance = d;
+    }
+    void deposit(float a)
+    {
+        balance = balance + a;
+    }
+    void withdraw(float b)
+    {
+        if (balance >= b)
+        {
+            balance = balance - b;
+            display(0, b);
+        }
+        else
+        {
+            cout << endl
+                 << "Insufficieant Balance" << endl
+                 << endl;
+            display(0, 0);
+        }
+    }
+    void display(float depo, float withdr)
+    {
+        cout << "Name : " << name << endl;
+        cout << "Account Number : " << accno << endl;
+        cout << "Amount Withdraw : " << withdr << endl;
+        cout << "Aamount Deposit : " << depo << endl;
+        cout << "Updated Balance : " << balance << endl;
+    }
 };
-
-inline void Bank::read()
-{
-    cout << "Enter Name" << endl;
-    cin >> name;
-    cout << "Enter Account Number" << endl;
-    cin >> accn;
-    cout << "Enter Balance" << endl;
-    cin >> bal;
-}
-
-inline void Bank::display()
-{
-    cout << "Name : " << name << endl;
-    cout << "Account Number : " << accn << endl;
-    cout << "Balance : " << bal << endl;
-}
-
-inline void Bank::getacc()
-{
-    cout << "Account Number : " << accn << endl;
-}
-
-inline void Bank::deposite()
-{
-    int deposite;
-    cout << "Enter Deposite Amount" << endl;
-    cin >> deposite;
-    bal += deposite;
-    cout << "Updated Balance : " << bal << endl;
-}
-
-inline void Bank::withdraw()
-{
-    int withdraw;
-    cout << "Enter Withdraw Amount" << endl;
-    cin >> withdraw;
-    bal -= withdraw;
-    cout << "Updated Balance : " << bal << endl;
-}
-
 int main()
 {
-    Bank o[10];
-    int n, i, id, opt;
-    cout << "Enter Number of Employees" << endl;
-    cin >> n;
-
-    for (i = 0; i < n; i++)
+    string s, type;
+    int accno, choice;
+    float bal, depo, withdr;
+    cout << "Enter name : ";
+    cin >> s;
+    cout << "Enter Account Number. : ";
+    cin >> accno;
+    cout << "Enter type : ";
+    cin >> type;
+    cout << "Enter balance : ";
+    cin >> bal;
+    bankdata b1(accno, s, type, bal);
+    while (choice != 3)
     {
-        cout << "Enter Information of Employee Number : " << i + 1 << endl;
-        o[i].read();
-    }
-
-    for (i = 0; i < n; i++)
-    {
-        cout << "Information of Employee Number : " << i + 1 << endl;
-        o[i].display();
-    }
-
-    cout << "Enter Employee Number To Manage Account" << endl;
-    cin >> id;
-    cout << "Enter" << endl;
-    cout << "\t1. Get Account Number" << endl;
-    cout << "\t2. Deposite Amount" << endl;
-    cout << "\t3. Withdraw Amount" << endl;
-    cin >> opt;
-
-    do
-    {
-        switch (opt)
+        cout << "Enter choice:" << endl;
+        cout << "1.Deposit" << endl
+             << "2.Withdraw" << endl
+             << "3.Exit" << endl;
+        cin >> choice;
+        if (choice == 1)
         {
-        case 1:
-            o[id - 1].getacc();
-            break;
-        case 2:
-            o[id - 1].deposite();
-            break;
-        case 3:
-            o[id - 1].withdraw();
-            break;
+            cout << "Amount to deposit : ";
+            cin >> depo;
+            b1.deposit(depo);
+            b1.display(depo, 0);
         }
-    } while (1);
-
-    return 0;
+        else if (choice == 2)
+        {
+            cout << "Amount to withdraw : ";
+            cin >> withdr;
+            b1.withdraw(withdr);
+        }
+    }
 }

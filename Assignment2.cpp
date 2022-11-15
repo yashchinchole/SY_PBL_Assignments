@@ -1,123 +1,83 @@
+// ASSIGNMENT NO - 2
+// NAME - YASH JITENDRA CHINCHOLE
+// ROLL NO - SYCOA37
+
 #include <bits/stdc++.h>
 using namespace std;
 
-class Vehicle
+class database
 {
-public:
-    int milege, price;
-};
+    friend void display(database);
+    int roll_no, telephone;
+    string name, blood_gr, contact_add, dob;
 
-class Car : public Vehicle
-{
 public:
-    int ownership_cost, warranty, seating_capacity;
-    string fuel_type;
-};
-class Bike : public Vehicle
-{
-public:
-    int no_cylinders, no_gears;
-    string cooling_type, wheel_type;
-    int fuel_tank_size;
-};
+    static int std_no;
 
-class Audi : public Car
-{
-public:
-    string model_type;
-    void read_Audi();
-    void display_Audi();
+    database()
+    {
+        cout << "-------------------------------------" << endl;
+        cout << "Name : ";
+        cin >> name;
+        cout << "Roll no : ";
+        cin >> roll_no;
+        cout << "Date of Birth : ";
+        cin >> dob;
+        cout << "blood group : ";
+        cin >> blood_gr;
+        cout << "Phone number : ";
+        cin >> telephone;
+        cout << "City : ";
+        cin >> contact_add;
+        cout << "-------------------------------------" << endl;
+
+        std_no++;
+    }
+
+    static void getcount()
+    {
+        cout << "Total students are " << std_no << endl;
+    }
+    inline void call()
+    {
+        cout << "inline function" << endl;
+    }
+    ~database()
+    {
+        cout << "destructor invoked " << endl;
+    }
 };
-class Ford : public Car
+int database ::std_no = 1;
+void display(database a)
 {
-public:
-    string model_type;
-    void read_Ford();
-    void display_Ford();
-};
+    cout << endl
+         << endl
+         << endl;
 
-class bajaj : public Bike
-{
-public:
-    string make_type;
-};
-class tvs : public Bike
-{
-public:
-    string make_type;
-};
-
-void Audi ::read_Audi()
-{
-    cout << "welcome to Audi" << endl;
-    cout << "enter model type: ";
-    cin >> model_type;
-    cout << "enter owernship cost";
-    cin >> ownership_cost;
-    cout << "enter warrenty in year";
-    cin >> warranty;
-    cout << "enter seating capacity";
-    cin >> seating_capacity;
-    cout << "enter fuel type (diesel or petrol)";
-    cin >> fuel_type;
-    cout << "enter milege";
-    cin >> milege;
-    cout << "enter price of the Vehicle";
-    cin >> price;
-}
-
-void Ford ::read_Ford()
-{
-    cout << endl;
-    cout << "welcome to Ford " << endl;
-    cout << "enter model type: ";
-    cin >> model_type;
-    cout << "enter owernship cost";
-    cin >> ownership_cost;
-    cout << "enter warrenty in year";
-    cin >> warranty;
-    cout << "enter seating capacity";
-    cin >> seating_capacity;
-    cout << "enter fuel type (diesel or petrol)";
-    cin >> fuel_type;
-    cout << "enter milege";
-    cin >> milege;
-    cout << "enter price of the Vehicle";
-    cin >> price;
-}
-
-void Audi ::display_Audi()
-{
-    cout << endl;
-    cout << "model type is " << model_type << endl;
-    cout << "owernship cost is " << ownership_cost << endl;
-    cout << "warrenty in year is " << warranty << endl;
-    cout << "seating capacity is " << seating_capacity << endl;
-    cout << "fuel type (diesel or petrol) is " << fuel_type;
-    cout << "milege is " << milege << endl;
-    cout << "price of the Vehicle is " << price << endl;
-}
-
-void Ford ::display_Ford()
-{
-    cout << endl;
-    cout << "model type is " << model_type << endl;
-    cout << "owernship cost is " << ownership_cost << endl;
-    cout << "warrenty in year is " << warranty << endl;
-    cout << "seating capacity is " << seating_capacity << endl;
-    cout << "fuel type (diesel or petrol) is " << fuel_type;
-    cout << "milege is " << milege << endl;
-    cout << "price of the Vehicle is " << price << endl;
+    cout << "-------------------------------------" << endl;
+    cout << "Information " << endl;
+    cout << "Name : " << a.name << endl;
+    cout << "Roll NO. : " << a.roll_no << endl;
+    cout << "Date of Birth : " << a.dob << endl;
+    cout << "Blood group : " << a.blood_gr << endl;
+    cout << "Phone Number : " << a.telephone << endl;
+    cout << "City : " << a.contact_add << endl;
+    cout << "-------------------------------------" << endl;
 }
 
 int main()
 {
-    Audi o1;
-    Ford o2;
-    o1.read_Audi();
-    o1.display_Audi();
-    o2.read_Ford();
-    o2.display_Ford();
+    int num;
+
+    cout << "Enter Number of students : ";
+    cin >> num;
+
+    database d[num];
+    for (int i = 0; i < num; i++)
+    {
+        display(d[i]);
+    }
+    cout << "Total students : " << database::getcount << endl;
 
     return 0;
 }
