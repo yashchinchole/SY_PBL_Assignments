@@ -5,7 +5,7 @@ using namespace std;
 class shape
 {
 public:
-double length,breadth;
+    double length, breadth;
     shape()
     {
     }

@@ -14,7 +14,7 @@ public:
     void employee_data(int q)
     {
         cout << "\n\t\tENTER DETAILS" << endl;
-        id=q;
+        id = q;
         cout << "\t\tenter name:";
         cin >> name;
         cout << "\t\tenter age:";
@@ -39,26 +39,26 @@ public:
     void insert(int p)
     {
         fstream f;
-        f.open("pbl8.dat", ios::in|ios::binary);
-        if(!f)
-        {
+        f.open("pbl8.dat", ios::in | ios::binary);
+
+        if (!f)
             cout << "\t\terror in opening the file." << endl;
-        }
-         else
+
+        else
         {
             f.read((char *)this, sizeof(*this));
             while (!f.eof())
             {
                 if (id == p)
                 {
-                    cout<<"\t\tData with given id already exist"<<endl;
-                    return ;
+                    cout << "\t\tData with given id already exist" << endl;
+                    return;
                 }
                 f.read((char *)this, sizeof(*this));
             }
             f.close();
         }
-        f.open("pbl8.dat", ios::app|ios::out|ios::binary);
+        f.open("pbl8.dat", ios::app | ios::out | ios::binary);
         employee_data(p);
         f.write((char *)this, sizeof(*this));
         f.close();
@@ -74,7 +74,6 @@ public:
         f.open("pbl8.dat", ios::in | ios::binary);
         if (!f)
         {
-            
         }
         else
         {
@@ -190,7 +189,8 @@ public:
     {
         fstream f;
         f.open("pbl8.dat", ios::in | ios::binary | ios::app);
-        cout << "\t\tThe data is as follow" << endl<<endl;
+        cout << "\t\tThe data is as follow" << endl
+             << endl;
         if (!f)
         {
             cout << "\t\terror in opening the file." << endl;
@@ -216,7 +216,7 @@ public:
 
     int menu()
     {
-        int choice = 0,id1;
+        int choice = 0, id1;
         while (1)
         {
             cout << "\n\t\tMENU" << endl
@@ -233,8 +233,8 @@ public:
             switch (choice)
             {
             case 1:
-                cout<<"\t\tEnter the id to insert data:";
-                cin>>id1;
+                cout << "\t\tEnter the id to insert data:";
+                cin >> id1;
                 insert(id1);
                 break;
             case 2:
