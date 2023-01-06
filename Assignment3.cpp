@@ -18,15 +18,10 @@ public:
         cout << "Price : ";
         cin >> price;
     }
-    int getMileage()
-    {
-        return mileage;
-    }
-    int getPrice()
-    {
-        return price;
-    }
+    int getMileage() { return mileage; }
+    int getPrice() { return price; }
 };
+
 class Car : public Vehicle
 {
     int store_ownwership_cost;
@@ -46,26 +41,14 @@ public:
         cout << "Fuel Type : ";
         cin >> fuel_type;
     }
-    int get_cost()
-    {
-        return store_ownwership_cost;
-    }
-    int getWarranty()
-    {
-        return Warranty;
-    }
-    int getSeat_cap()
-    {
-        return seating_capacity;
-    }
-    string getFuel_type()
-    {
-        return fuel_type;
-    }
+    int get_cost() { return store_ownwership_cost; }
+    int getWarranty() { return Warranty; }
+    int getSeat_cap() { return seating_capacity; }
+    string getFuel_type() { return fuel_type; }
 };
+
 class Bike : public Vehicle
 {
-
     int no_of_cylinders;
     int no_of_gears;
     string cooling_type;
@@ -86,27 +69,13 @@ public:
         cout << "Size of Fuel tank (in inches) : ";
         cin >> fuel_tank_Size;
     }
-    int get_no_of_cyl()
-    {
-        return no_of_cylinders;
-    }
-    int get_no_of_gears()
-    {
-        return no_of_gears;
-    }
-    string get_cooltype()
-    {
-        return cooling_type;
-    }
-    string get_wheeltype()
-    {
-        return wheel_type;
-    }
-    float get_tanksize()
-    {
-        return fuel_tank_Size;
-    }
+    int get_no_of_cyl() { return no_of_cylinders; }
+    int get_no_of_gears() { return no_of_gears; }
+    string get_cooltype() { return cooling_type; }
+    string get_wheeltype() { return wheel_type; }
+    float get_tanksize() { return fuel_tank_Size; }
 };
+
 class Audi : public Car
 {
     string Model_type;
@@ -116,7 +85,6 @@ public:
     {
         cout << "Model Type : ";
         cin >> Model_type;
-        cout << "---------------------------------------" << endl;
     }
     void print_info()
     {
@@ -132,6 +100,7 @@ public:
         cout << "---------------------------------------" << endl;
     }
 };
+
 class Ford : public Car
 {
     string Model_type;
@@ -157,6 +126,7 @@ public:
         cout << "---------------------------------------" << endl;
     }
 };
+
 class Bajaj : public Bike
 {
     string type;
@@ -182,6 +152,7 @@ public:
         cout << "---------------------------------------" << endl;
     }
 };
+
 class TVS : public Bike
 {
     string type;
@@ -210,11 +181,13 @@ public:
 
 int main()
 {
-    cout << "Enter info of Audi Car" << endl;
     Audi a;
-    cout << "Enter info of Ford Car" << endl;
-    Ford f;
+    cout << "Enter info of Audi Car" << endl;
     a.print_info();
+
+    Ford f;
+    cout << "Enter info of Ford Car" << endl;
     f.print_info();
+
     return 0;
 }

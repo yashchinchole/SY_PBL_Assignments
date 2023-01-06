@@ -1,7 +1,3 @@
-/*
-NAME:SARVESH BAPUSAHEB CHAVAN
-ROLL NO:SYCOA124
-*/
 #include <iostream>
 #include <string>
 #include <map>

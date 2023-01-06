@@ -41,7 +41,7 @@ void update_vector(vector<int> p[])
 }
 void multiply_vector(vector<int> p[])
 {
-    int n,temp;
+    int n, temp;
     vector<int>::iterator it;
     it = p->begin();
     cout << endl
@@ -49,7 +49,7 @@ void multiply_vector(vector<int> p[])
     cin >> n;
     for (it; it < p->end(); it++)
     {
-        temp=*it;
+        temp = *it;
         p->erase(it);
         p->insert(it, (temp * n));
     }
