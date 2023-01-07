@@ -1,83 +1,73 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-class complex
+
+class Complex
 {
-    int real;
-    int img;
+private:
+    int real, img;
 
 public:
-    complex()
-    {
-        real = 0;
-        img = 0;
-    }
-    void display_complex()
-    {
-        if (img > 0)
-        {
-            cout << "Complex number : " << real << "+" << img << "i" << endl;
-        }
-        else
-        {
-            cout << "Complex number : " << real << img << "i" << endl;
-        }
-    }
-    friend complex operator+(complex a, complex c);
-    friend complex operator*(complex a, complex c);
-    void operator<<(complex a)
-    {
-        if (img >= 0)
-        {
-            cout << "Complex number : " << a.real << "+" << a.img << "i" << endl;
-        }
-        else
-        {
-            cout << "Complex number : " << a.real << a.img << "i" << endl;
-        }
-    }
-    complex operator>>(complex a)
-    {
-        cout << "real : ";
-        cin >> a.real;
-        cout << "img : ";
-        cin >> a.img;
-        return a;
-    }
+    Complex();
+    friend Complex operator+(Complex a, Complex b);
+    friend Complex operator*(Complex a, Complex b);
+    Complex operator>>(Complex a);
+    void operator<<(Complex a);
 };
-complex operator+(complex a, complex c)
+
+Complex::Complex()
 {
-    complex b;
-    b.real = c.real + a.real;
-    b.img = c.img + a.img;
-    return b;
+    real = img = 0;
 }
-complex operator*(complex a, complex c)
+
+Complex operator+(Complex a, Complex b)
 {
-    complex b;
-    b.real = c.real * a.real - a.img * c.img;
-    b.img = c.real * a.img + c.img * a.real;
-    return b;
+    Complex c;
+    c.real = a.real + b.real;
+    c.img = a.img + b.img;
+
+    return c;
 }
+
+Complex operator*(Complex a, Complex b)
+{
+    Complex c;
+    c.real = a.real * b.real - a.img * b.img;
+    c.img = a.real * b.img + b.real * a.img;
+
+    return c;
+}
+
+Complex Complex ::operator>>(Complex a)
+{
+    cout << "Real : ";
+    cin >> a.real;
+    cout << "Img : ";
+    cin >> a.img;
+
+    return a;
+}
+
+void Complex::operator<<(Complex a)
+{
+    if (img >= 0)
+        cout << "Complex Number : " << a.real << " + " << a.img << "i" << endl;
+    else
+        cout << "Complex Number : " << a.real << a.img << "i" << endl;
+}
+
 int main()
 {
-    complex a, b, c;
-    cout << "-----------------------------------" << endl;
-    cout << "-----------------------------------" << endl;
-    cout << "First number :" << endl;
+    Complex a, b, c;
+    cout << "Enter 1 Number" << endl;
     a = a >> (a);
-    cout << "-----------------------------------" << endl;
-    cout << "Second number :" << endl;
+    cout << "Enter 2 Number" << endl;
     b = b >> (b);
-    cout << "-----------------------------------" << endl;
-    cout << "-----------------------------------" << endl;
-    cout << "Addition : " << endl;
+    cout << "Addition" << endl;
     c = a + b;
     c << (c);
-    cout << "-----------------------------------" << endl;
     cout << "Multiplication" << endl;
     c = a * b;
     c << (c);
-    cout << "-----------------------------------" << endl;
-    cout << "-----------------------------------" << endl;
+
     return 0;
 }
