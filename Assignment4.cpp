@@ -8,10 +8,10 @@ private:
 
 public:
     Complex();
-    friend Complex operator+(Complex a, Complex b);
-    friend Complex operator*(Complex a, Complex b);
-    Complex operator>>(Complex a);
-    void operator<<(Complex a);
+    friend Complex operator+(Complex, Complex);
+    friend Complex operator*(Complex, Complex);
+    Complex operator>>(Complex);
+    void operator<<(Complex);
 };
 
 Complex::Complex()
