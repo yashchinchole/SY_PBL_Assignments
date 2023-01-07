@@ -9,7 +9,7 @@ class Vehicle
 public:
     Vehicle()
     {
-        cout << "Mileage  : ";
+        cout << "Mileage : ";
         cin >> mileage;
         cout << "Price : ";
         cin >> price;
@@ -20,9 +20,7 @@ public:
 
 class Car : public Vehicle
 {
-    int store_ownwership_cost;
-    int Warranty;
-    int seating_capacity;
+    int store_ownwership_cost, Warranty, seating_capacity;
     string fuel_type;
 
 public:
@@ -45,10 +43,8 @@ public:
 
 class Bike : public Vehicle
 {
-    int no_of_cylinders;
-    int no_of_gears;
-    string cooling_type;
-    string wheel_type;
+    int no_of_cylinders, no_of_gears;
+    string cooling_type, wheel_type;
     float fuel_tank_Size;
 
 public:
@@ -84,7 +80,6 @@ public:
     }
     void print_info()
     {
-        cout << "---------------------------------------" << endl;
         cout << "Information of Audi ";
         cout << "Model Type : " << Model_type << endl;
         cout << "Milage (in mpl): " << getMileage() << endl;
@@ -93,7 +88,6 @@ public:
         cout << "Warranty (in years): " << getWarranty() << endl;
         cout << "Seating Capacity : " << getSeat_cap() << endl;
         cout << "Fuel Type : " << getFuel_type() << endl;
-        cout << "---------------------------------------" << endl;
     }
 };
 
@@ -106,11 +100,9 @@ public:
     {
         cout << "Model Type : ";
         cin >> Model_type;
-        cout << "---------------------------------------" << endl;
     }
     void print_info()
     {
-        cout << "---------------------------------------" << endl;
         cout << "Information of Ford ";
         cout << "Model Type : " << Model_type << endl;
         cout << "Milage (in mpl): " << getMileage() << endl;
@@ -119,7 +111,6 @@ public:
         cout << "Warranty (in years): " << getWarranty() << endl;
         cout << "Seating Capacity : " << getSeat_cap() << endl;
         cout << "Fuel Type : " << getFuel_type() << endl;
-        cout << "---------------------------------------" << endl;
     }
 };
 
@@ -135,7 +126,6 @@ public:
     }
     void print_info_bike()
     {
-        cout << "---------------------------------------" << endl;
         cout << "Information of Bajaj Bike ";
         cout << "Model Type : " << type << endl;
         cout << "Milage (in mpl): " << getMileage() << endl;
@@ -145,7 +135,6 @@ public:
         cout << "Cooling Type : " << get_cooltype() << endl;
         cout << "Wheel Type : " << get_wheeltype() << endl;
         cout << "Size of Tank (in inches) : " << get_tanksize() << endl;
-        cout << "---------------------------------------" << endl;
     }
 };
 
@@ -161,7 +150,6 @@ public:
     }
     void print_info_bike()
     {
-        cout << "---------------------------------------" << endl;
         cout << "Information of Bajaj Bike ";
         cout << "Model Type : " << type << endl;
         cout << "Milage (in mpl): " << getMileage() << endl;
@@ -171,7 +159,6 @@ public:
         cout << "Cooling Type : " << get_cooltype() << endl;
         cout << "Wheel Type : " << get_wheeltype() << endl;
         cout << "Size of Tank (in inches) : " << get_tanksize() << endl;
-        cout << "---------------------------------------" << endl;
     }
 };
 
