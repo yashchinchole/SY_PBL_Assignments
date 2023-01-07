@@ -1,7 +1,3 @@
-// ASSIGNMENT NO - 3
-// NAME - YASH JITENDRA CHINCHOLE
-// ROLL NO - SYCOA37
-
 #include <bits/stdc++.h>
 using namespace std;
 
