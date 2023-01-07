@@ -1,12 +1,8 @@
-// ASSIGNMENT NO - 7
-// NAME - YASH JITENDRA CHINCHOLE
-// ROLL NO - SYCOA37
-
 #include <bits/stdc++.h>
 using namespace std;
 
 template <class T>
-class Vector
+class Vec
 {
 private:
     T *a;
@@ -14,77 +10,82 @@ private:
 
 public:
     void Read();
-    void Modify(int Old, int New);
-    void Multiply(int n);
+    void Modify(int, int);
+    void Multiply(int);
     void Display();
 };
 
 template <class T>
-void Vector<T>::Read()
+void Vec<T>::Read()
 {
-    cout << "Enter the size of the Vector: ";
+    cout << "Enter Vector Size" << endl;
     cin >> n;
+
+    cout << "Enter Vector Elements" << endl;
     a = new int[n];
-    cout << "Enter " << n << " data elements: ";
+
     for (int i = 0; i < n; i++)
         cin >> *(a + i);
 }
 
 template <class T>
-void Vector<T>::Modify(int Old, int New)
+void Vec<T>::Modify(int x, int y)
 {
-    int pos = 0, found = 0;
+    int p = 0, flag = 0;
+
     for (int i = 0; i < n; i++)
     {
-        if (Old == *(a + i))
+        if (*(a + i) == x)
         {
-            found = 1;
-            pos = i;
+            flag = 1;
+            p = i;
             break;
         }
     }
-    if (!found)
-        cout << "Element is not present in the Vector!\n";
+
+    if (flag)
+        *(a + p) = y;
     else
-        *(a + pos) = New;
+        cout << "Element Not Found" << endl;
 }
 
 template <class T>
-void Vector<T>::Multiply(int n)
+void Vec<T>::Multiply(int m)
 {
-    for (int i = 0; i < this->n; i++)
-        *(a + i) *= n;
+    for (int i = 0; i < n; i++)
+        *(a + i) *= m;
 }
 
 template <class T>
-void Vector<T>::Display()
+void Vec<T>::Display()
 {
-    cout << "\nVector Elements:\n";
     cout << "(";
     for (int i = 0; i < n; i++)
     {
         if (i != n - 1)
             cout << *(a + i) << ", ";
         else
-            cout << *(a + i) << ")\n";
+            cout << *(a + i) << ")" << endl;
     }
 }
 
 int main()
 {
-    Vector<int> v1;
-    int a, b;
-    v1.Read();
-    v1.Display();
-    cout << "Enter two numbers for Modifying a data element\n(Old_Value  -  New_Value)\n"
-         << endl;
-    cin >> a >> b;
-    v1.Modify(a, b);
-    v1.Display();
-    cout << "Enter a scaler to multiply a Vector by\n";
+    Vec<int> v;
+    int a, b, m;
+
+    v.Read();
+    v.Display();
+    cout << "Enter Old Element to Modify" << endl;
     cin >> a;
-    v1.Multiply(a);
-    v1.Display();
+    cout << "Enter New Element to Modify" << endl;
+    cin >> b;
+    v.Modify(a, b);
+    v.Display();
+    cout << "Enter Number to Multiply" << endl;
+    cin >> m;
+    v.Multiply(m);
+    v.Display();
 
     return 0;
 }
