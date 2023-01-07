@@ -11,10 +11,8 @@ int main()
         frequency[arr[i]]++;
 
     for (auto &it : frequency)
-    {
         if (it.second > 1)
             cout << it.first << " Appears " << it.second << " Times" << endl;
-    }
 
     return 0;
 }
