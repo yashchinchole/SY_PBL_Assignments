@@ -1,197 +1,82 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-class matrix
+class Mat
 {
-    int row, coloumn, M[5][5];
+private:
+    int m[10][10];
+    int row, col;
 
 public:
-    void read()
-    {
-        cout << "\nEnter the number of rows : ";
-        cin >> row;
-        cout << "\nEnter the number of coloumns : ";
-        cin >> coloumn;
+    void Read();
+    void Add(Mat);
+};
 
-        try
+void Mat::Read()
+{
+    cout << "Enter Rows : ";
+    cin >> row;
+    cout << "Enter Columns : ";
+    cin >> col;
+
+    try
+    {
+        if (row > 10 || col > 10)
+            throw 2;
+    }
+
+    catch (int n)
+    {
+        if (n == 2)
         {
-            if (row > 5 || coloumn > 5)
-            {
-                throw 1;
-            }
-        }
-        catch (int a)
-        {
-            cout << "\nexception caught!\n";
-            cout << "\nNumber of rows and coloumns should be less than equal to 5 !\n";
+            cout << "Number of Rows & Columns Are Beyond Array Size" << endl;
             return;
         }
-
-        for (int i = 0; i < row; i++)
-        {
-            cout << "\nEnter elements of " << i + 1 << " row :" << endl;
-
-            for (int j = 0; j < coloumn; j++)
-            {
-                cout << "\nEnter element at (" << i + 1 << "," << j + 1 << ") position :";
-                cin >> M[i][j];
-            }
-        }
     }
 
-    void display()
+    for (int i = 0; i < row; i++)
     {
-        cout << "\nDisplaying array.......\n\n"
-             << endl;
-
-        for (int i = 0; i < row; i++)
-        {
-            for (int j = 0; j < coloumn; j++)
-            {
-                cout << M[i][j] << " ";
-            }
-            cout << "\n\n";
-        }
+        for (int j = 0; j < col; j++)
+            cin >> m[i][j];
     }
+}
 
-    matrix operator+(matrix x)
+void Mat::Add(Mat m2)
+{
+    try
     {
-        matrix X;
-        X.row = row;
-        X.coloumn = coloumn;
-
-        try
-        {
-            if (row != x.row || coloumn != x.coloumn)
-            {
-                throw 1;
-            }
-        }
-        catch (int e)
-        {
-            cout << "\nException Caugth in 4K!";
-            cout << "\nNumber of row and coloumns shoulld be eqaul for addition!";
-            exit(0);
-        }
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                X.M[i][j] = M[i][j] + x.M[i][j];
-            }
-        }
-        cout << "\nAddition of matrix : \n";
-
-        return X;
+        if (this->row != m2.row || this->col != m2.col)
+            throw 2;
     }
 
-    matrix operator-(matrix x)
+    catch (int n)
     {
-        matrix X;
-        X.row = row;
-        X.coloumn = coloumn;
-
-        try
+        if (n == 2)
         {
-            if (row != x.row || coloumn != x.coloumn)
-            {
-                throw 1;
-            }
+            cout << "Number of Rows & Columns Do Not Match" << endl;
+            return;
         }
-        catch (int e)
-        {
-            cout << "\nException Caugth in 4K!";
-            cout << "\nNumber of row and coloumns shoulld be eqaul for addition!";
-            exit(0);
-        }
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                X.M[i][j] = M[i][j] - x.M[i][j];
-            }
-        }
-
-        cout << "\nSubtraction of matrix : \n";
-
-        return X;
     }
 
-    matrix operator*(matrix x)
+    int arr[this->row][this->col];
+
+    for (int i = 0; i < this->row; i++)
     {
-        matrix c;
-        int i, j, k;
-
-        try
+        for (int j = 0; j < this->col; j++)
         {
-            if (coloumn != x.row)
-            {
-                throw 1;
-            }
+            arr[i][j] = this->m[i][j] + m2.m[i][j];
+            cout << arr[i][j];
         }
-        catch (int e)
-        {
-            cout << "\n\nMultiplication is not possible!";
-            exit(0);
-        }
-        c.row = row;
-        c.coloumn = x.coloumn;
-
-        for (i = 0; i < row; i++)
-        {
-            for (j = 0; j < x.coloumn; j++)
-            {
-                c.M[i][j] = 0;
-                for (k = 0; k < row; k++)
-                {
-                    c.M[i][j] += M[i][k] * x.M[k][j];
-                }
-            }
-        }
-        return c;
     }
-};
+}
 
 int main()
 {
-    int choice;
-    matrix m1, m2, m3, m4, m5;
+    Mat m1, m2;
 
-    cout << "\nEnter first matrix : " << endl;
-    m1.read();
-    m1.display();
-
-    cout << "\nEnter second matrix : " << endl;
-    m2.read();
-    m2.display();
-
-    while (choice != 4)
-    {
-        cout << "\n1.Addition\n2.Subtraction\n3.Multiplication\n4.exit";
-        cout << "\nEnter your choice : ";
-        cin >> choice;
-
-        switch (choice)
-        {
-        case 1:
-            m3 = m1 + m2;
-            m3.display();
-            break;
-        case 2:
-            m4 = m1 - m2;
-            m4.display();
-            break;
-        case 3:
-            m5 = m1 * m2;
-            m5.display();
-            break;
-        case 4:
-            break;
-        default:
-            cout << "\nEnter a valid choice !" << endl;
-        }
-    }
-    cout << "\nExited Successfully!";
+    m1.Read();
+    m2.Read();
+    m1.Add(m2);
 
     return 0;
 }
