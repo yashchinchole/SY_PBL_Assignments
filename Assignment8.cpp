@@ -1,274 +1,126 @@
-#include <iostream>
-#include <iomanip>
-#include <fstream>
+#include <bits/stdc++.h>
 using namespace std;
 
-class employee
+class Employee
 {
 public:
     int id;
-    string name;
-    int age;
-    string department, post;
-    int salary;
-    void employee_data(int q)
+    char name[10];
+
+    void Read()
     {
-        cout << "\n\t\tENTER DETAILS" << endl;
-        id = q;
-        cout << "\t\tenter name:";
+        cout << "Enter Name : ";
         cin >> name;
-        cout << "\t\tenter age:";
-        cin >> age;
-        cout << "\t\tenter department:";
-        cin >> department;
-        cout << "\t\tenter post:";
-        cin >> post;
-        cout << "\t\tenter salary:";
-        cin >> salary;
-        cout << endl;
-    }
-    void display()
-    {
-        cout << "\t\tId:" << id << endl;
-        cout << "\t\tName:" << name << endl;
-        cout << "\t\tAge:" << age << endl;
-        cout << "\t\tDepartment:" << department << endl;
-        cout << "\t\tPost:" << post << endl;
-        cout << "\t\tSalary:" << salary << endl;
-    }
-    void insert(int p)
-    {
-        fstream f;
-        f.open("pbl8.dat", ios::in | ios::binary);
-
-        if (!f)
-            cout << "\t\terror in opening the file." << endl;
-
-        else
-        {
-            f.read((char *)this, sizeof(*this));
-            while (!f.eof())
-            {
-                if (id == p)
-                {
-                    cout << "\t\tData with given id already exist" << endl;
-                    return;
-                }
-                f.read((char *)this, sizeof(*this));
-            }
-            f.close();
-        }
-        f.open("pbl8.dat", ios::app | ios::out | ios::binary);
-        employee_data(p);
-        f.write((char *)this, sizeof(*this));
-        f.close();
-        cout << "\t\tData inserted" << endl;
-    }
-    void search()
-    {
-        int id1, count = 0;
-        ifstream f;
-        cout << "\t\tEnter id to search data:";
-        cin >> id1;
-        cout << endl;
-        f.open("pbl8.dat", ios::in | ios::binary);
-        if (!f)
-        {
-        }
-        else
-        {
-            f.read((char *)this, sizeof(*this));
-            while (!f.eof())
-            {
-                if (id == id1)
-                {
-                    cout << "\t\tDATA FOUND" << endl;
-                    this->display();
-                    count++;
-                    break;
-                }
-                f.read((char *)this, sizeof(*this));
-            }
-            if (count == 0)
-            {
-                cout << "\t\tDATA NOT FOUND" << endl;
-            }
-            f.close();
-        }
-    }
-    void removedata()
-    {
-        int id1, count = 0;
-        ifstream f;
-        ofstream f1;
-        cout << "\t\tEnter id to delete data:";
-        cin >> id1;
-        cout << endl;
-        f.open("pbl8.dat", ios::in | ios::binary);
-        f1.open("pbl82.dat", ios::out | ios::binary);
-        if (!f)
-        {
-            cout << "\t\terror in opening the file." << endl;
-        }
-        else
-        {
-            f.read((char *)this, sizeof(*this));
-            while (!f.eof())
-            {
-                if (id != id1)
-                {
-                    f1.write((char *)this, sizeof(*this));
-                }
-                else
-                {
-                    count++;
-                }
-                f.read((char *)this, sizeof(*this));
-            }
-            f.close();
-            f1.close();
-            remove("pbl8.dat");
-            rename("pbl82.dat", "pbl8.dat");
-            if (count)
-            {
-                cout << "\t\tData deleted " << endl;
-            }
-            else
-            {
-                cout << "\t\tData not found" << endl;
-            }
-        }
-    }
-    void update()
-    {
-        int id1, count = 0;
-        fstream f, f1;
-        cout << "\t\tEnter id to update data:";
-        cin >> id1;
-        cout << endl;
-        f.open("pbl8.dat", ios::in | ios::binary | ios::out);
-        f1.open("pbl82.dat", ios::out | ios::binary);
-        if (!f)
-        {
-            cout << "\t\terror in opening the file." << endl;
-        }
-        else
-        {
-            f.read((char *)this, sizeof(*this));
-            while (!f.eof())
-            {
-                if (id == id1 && count == 0)
-                {
-                    this->employee_data(id1);
-                    f1.write((char *)this, sizeof(*this));
-                    count++;
-                    break;
-                }
-                else
-                {
-                    f1.write((char *)this, sizeof(*this));
-                }
-                f.read((char *)this, sizeof(*this));
-            }
-            f.close();
-            f1.close();
-            remove("pbl8.dat");
-            rename("pbl82.dat", "pbl8.dat");
-            if (count == 1)
-            {
-                cout << "\t\tData updated" << endl;
-            }
-            else
-            {
-                cout << "\t\tData not found with given id" << endl;
-            }
-        }
+        cout << "Enter ID: ";
+        cin >> id;
     }
 
-    void displayall()
+    void Display()
     {
-        fstream f;
-        f.open("pbl8.dat", ios::in | ios::binary | ios::app);
-        cout << "\t\tThe data is as follow" << endl
-             << endl;
-        if (!f)
-        {
-            cout << "\t\terror in opening the file." << endl;
-        }
-        else
-        {
-            f.read((char *)this, sizeof(*this));
-            while (!f.eof())
-            {
-                this->display();
-                cout << endl;
-                f.read((char *)this, sizeof(*this));
-            }
-            f.close();
-        }
-    }
-
-    void deletefile()
-    {
-        remove("pbl8.dat");
-        cout << "\t\tFile deleted " << endl;
-    }
-
-    int menu()
-    {
-        int choice = 0, id1;
-        while (1)
-        {
-            cout << "\n\t\tMENU" << endl
-                 << "\t\t1)insert" << endl
-                 << "\t\t2)search" << endl
-                 << "\t\t3)delete" << endl
-                 << "\t\t4)update" << endl
-                 << "\t\t5)display" << endl
-                 << "\t\t6)delete file" << endl
-                 << "\t\t7)exit" << endl;
-            cout << "\t\tEnter choice:";
-            cin >> choice;
-            cout << endl;
-            switch (choice)
-            {
-            case 1:
-                cout << "\t\tEnter the id to insert data:";
-                cin >> id1;
-                insert(id1);
-                break;
-            case 2:
-                search();
-                break;
-            case 3:
-                removedata();
-                break;
-            case 4:
-                update();
-                break;
-            case 5:
-                displayall();
-                break;
-            case 6:
-                deletefile();
-                break;
-            case 7:
-                return 0;
-                break;
-            default:
-                cout << "\t\twrong choice!!!" << endl;
-                break;
-            }
-        }
+        cout << "Name : " << name << endl;
+        cout << "ID : " << id << endl;
     }
 };
 
+void CreateFile()
+{
+    Employee e;
+    ofstream f("yash.dat", ios::binary | ios::app);
+    f.write((char *)&e, sizeof(e));
+    f.close();
+}
+
+void ReadFile()
+{
+    Employee e;
+    ifstream f("yash.dat", ios::binary | ios::in);
+    while (f.read((char *)&e, sizeof(e)))
+        e.Display();
+    f.close();
+}
+
+void SearchFile()
+{
+    Employee e;
+    int i, flag = 0;
+    cout << "Enter ID to be Searched" << endl;
+    cin >> i;
+
+    ifstream f("yash.dat", ios::binary | ios::in);
+    while (f.read((char *)&e, sizeof(e)))
+    {
+        if (e.id == i)
+            flag = 1;
+    }
+    f.close();
+
+    if (!flag)
+        cout << "Not Found" << endl;
+}
+
+void UpdateFile()
+{
+    Employee e;
+    fstream f("yash.dat", ios::binary | ios::in | ios::out);
+
+    char n[10];
+    cout << "Enter Name to Update" << endl;
+    cin >> n;
+    int i;
+    cout << "Enter ID to Update" << endl;
+    cin >> i;
+
+    while (f.read((char *)&e, sizeof(e)))
+    {
+        if (e.id == i)
+        {
+            strcpy(e.name, n);
+            f.seekp(f.tellg() - sizeof(e), ios::beg);
+            f.write((char *)&e, sizeof(e));
+            cout << "Successfully Updated" << endl;
+            f.close();
+        }
+    }
+}
+
+void Deletefile()
+{
+    Employee e;
+    fstream f("yash.dat", ios::binary | ios::in | ios::out);
+    ofstream temp("temp.dat", ios::binary | ios::out);
+
+    int i;
+    cout << "Enter ID to Delete" << endl;
+    cin >> i;
+
+    while (f.read((char *)&e, sizeof(e)))
+    {
+        if (e.id != i)
+            temp.write((char *)&e, sizeof(e));
+    }
+    f.close();
+    temp.close();
+
+    remove("yash.dat");
+    rename("temp.dat", "yash.dat");
+}
+
 int main()
 {
-    cout << "\t\t........................." << endl;
-    cout << "\t\t|   EMPLOYEE DATABASE   |" << endl;
-    cout << "\t\t........................." << endl;
-    employee p;
-    p.menu();
+    Employee e[5];
+
+    for (int i = 0; i < 3; i++)
+        e[i].Read();
+
+    ReadFile();
+    for (int i = 0; i < 3; i++)
+        CreateFile();
+
+    ReadFile();
+    SearchFile();
+    ReadFile();
+    Deletefile();
+    ReadFile();
+
     return 0;
 }
