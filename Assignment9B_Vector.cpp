@@ -73,8 +73,11 @@ int main()
             for (it = M.begin(); it != M.end(); it++)
                 cout << it->first << " " << it->second[0] << " " << it->second[1] << endl;
             break;
+
+        case 6:
+            exit(0);
         }
-    } while (c != 6);
+    } while (1);
 
     return 0;
 }
