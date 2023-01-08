@@ -35,8 +35,7 @@ int main()
             cout << "Search Data" << endl;
             cout << "Enter Name to Find" << endl;
             cin >> name;
-            it = M.find(name);
-            if (it != M.end())
+            if (M.count(name) > 0)
                 cout << "Name Found" << endl;
             else
                 cout << "Not Found" << endl;
@@ -46,12 +45,8 @@ int main()
             cout << "Delete Data" << endl;
             cout << "Enter Name to Delete" << endl;
             cin >> name;
-            it = M.find(name);
-            if (it != M.end())
-            {
-                M.erase(name);
+            if (M.erase(name) > 0)
                 cout << "Name Deleted" << endl;
-            }
             else
                 cout << "Not Found" << endl;
             break;
@@ -60,8 +55,7 @@ int main()
             cout << "Update Data" << endl;
             cout << "Enter Name to Update" << endl;
             cin >> name;
-            it = M.find(name);
-            if (it != M.end())
+            if (M.count(name) > 0)
             {
                 cout << "Enter New Birthdate" << endl;
                 cin >> dob;
