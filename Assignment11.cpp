@@ -52,12 +52,12 @@ Ticket::Ticket()
 
 void Ticket::Book()
 {
-    int r, c, count = 0;
+    int r, c, count = 1;
     cout << "Enter Row & Column Number to Booked" << endl;
     cin >> r >> c;
 
     Node *temp = head[r];
-    while (count != c - 1)
+    while (count != c)
     {
         temp = temp->next;
         count++;
@@ -74,12 +74,12 @@ void Ticket::Book()
 
 void Ticket::Cancel()
 {
-    int r, c, count = 0;
+    int r, c, count = 1;
     cout << "Enter Row & Column Number to Cancel Ticket" << endl;
     cin >> r >> c;
 
     Node *temp = head[r];
-    while (count != c - 1)
+    while (count != c)
     {
         temp = temp->next;
         count++;
