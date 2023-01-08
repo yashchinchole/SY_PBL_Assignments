@@ -1,72 +1,128 @@
 #include <iostream>
 using namespace std;
-
-struct node
-{
-    char status;
-    node *next;
-    node *prev;
-};
-class cinemax
+class Node
 {
 public:
-    node *head[15];
-    node *tail[15];
-    cinemax()
+    string data = "Vacant";
+    Node *next;
+    Node *prev;
+};
+class Cinemax
+{
+public:
+    Node *b[15][10];
+    Cinemax()
     {
-        for (int i = 1; i <= 15; i++)
+        for (int i = 0; i < 15; i++)
         {
-            head[i] = NULL;
-            tail[i] = NULL;
-            for (int j = 1; j <= 10; j++)
+            b[i][0] = new Node();
+            b[i][0]->data = "Vacant";
+            b[i][0]->next = b[i][1];
+            b[i][0]->prev = NULL;
+        }
+        for (int i = 1; i < 15; i++)
+        {
+            for (int j = 0; j < 11; j++)
             {
-                node *temp;
-                if (head[i] == NULL)
+                b[i][j] = new Node();
+                if (j < 10)
                 {
-                    node *nn;
-                    nn = new node();
-                    nn->status = 'A';
-                    nn->prev = NULL;
-                    nn->next = NULL;
-                    head[i] = nn;
-                    temp = nn;
+                    b[i][j]->next = b[i][j + 1];
                 }
                 else
                 {
-                    node *nn;
-                    nn = new node();
-                    nn->status = 'A';
-                    nn->prev = temp;
-                    temp->next = nn;
-                    temp = nn;
+                    b[i][j]->next = NULL;
                 }
+                b[i][j]->prev = b[i][j - 1];
             }
         }
     }
-    void book_seat();
-    void display()
+    void bookTicket()
     {
-        for (int i = 1; i <= 15; i++)
+        int rno, seatno;
+        cout << "\nEnter row no : ";
+        cin >> rno;
+        cout << "\nEnter seat no : ";
+        cin >> seatno;
+        if (b[rno][seatno]->data == "Booked")
         {
-            node *t1;
-            for (t1 = head[i]; t1 != NULL; t1 = t1->next)
+            cout << "\nSeat is not vacant";
+        }
+        else
+        {
+            b[rno][seatno]->data = "Booked";
+            cout << "\nSeat booked";
+        }
+    }
+    void cancelTicket()
+    {
+        int rno, seatno;
+        cout << "\nEnter row no : ";
+        cin >> rno;
+        cout << "\nEnter seat no : ";
+        cin >> seatno;
+        if (b[rno][seatno]->data == "Booked")
+        {
+            b[rno][seatno]->data = "Vacant";
+            cout << "\nTicket booked";
+        }
+        else
+        {
+
+            cout << "\nSeat was not booked";
+        }
+    }
+    void availableSeats()
+    {
+        int seat = 0;
+        Node *temp;
+        for (int i = 0; i < 15; i++)
+        {
+            temp = b[i][0];
+            while (temp != NULL)
             {
-                cout << t1->status << " ";
+
+                cout << "\nRow no : " << i << " seat no " << seat;
+
+                temp = temp->next;
+                seat++;
             }
-            cout << endl;
         }
     }
 };
-
-void cinemax::book_seat()
-{
-    int r, c;
-    cout << "ENTER THE ROW AND COLUMN TO BE BOOKED" << endl;
-    cin >> r >> c;
-}
-
 int main()
 {
-    cinemax c1;
-    c1.display();
+    Cinemax c;
+
+    int choice;
+    do
+    {
+        cout << "\n1.Book ticket ";
+        cout << "\n2.Cancel ticket";
+        cout << "\n3.See available seats";
+
+        cout << "\n4.Exit";
+        cout << "\nChoice : ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            c.bookTicket();
+            break;
+        case 2:
+            c.cancelTicket();
+            break;
+        case 3:
+            c.availableSeats();
+            break;
+        case 4:
+            choice = 0;
+            break;
+
+        default:
+            break;
+        }
+    } while (choice);
+
+    return 0;
 }
