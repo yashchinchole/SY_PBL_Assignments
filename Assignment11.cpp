@@ -1,128 +1,120 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-class Node
+
+struct Node
 {
-public:
-    string data = "Vacant";
-    Node *next;
-    Node *prev;
+    char data;
+    Node *next, *prev;
 };
-class Cinemax
+
+class Ticket
 {
+private:
+    Node *head[15], *tail[15];
+
 public:
-    Node *b[15][10];
-    Cinemax()
+    Ticket();
+    void Book();
+    void Cancel();
+    void Display();
+};
+
+Ticket::Ticket()
+{
+    for (int i = 1; i <= 15; i++)
     {
-        for (int i = 0; i < 15; i++)
+        head[i] = tail[i] = NULL;
+
+        for (int j = 1; j <= 10; j++)
         {
-            b[i][0] = new Node();
-            b[i][0]->data = "Vacant";
-            b[i][0]->next = b[i][1];
-            b[i][0]->prev = NULL;
-        }
-        for (int i = 1; i < 15; i++)
-        {
-            for (int j = 0; j < 11; j++)
+            Node *temp;
+            if (head[i] == NULL)
             {
-                b[i][j] = new Node();
-                if (j < 10)
-                {
-                    b[i][j]->next = b[i][j + 1];
-                }
-                else
-                {
-                    b[i][j]->next = NULL;
-                }
-                b[i][j]->prev = b[i][j - 1];
+                Node *nn = new Node;
+                nn->data = '-';
+                nn->next = NULL;
+                nn->prev = NULL;
+                head[i] = nn;
+                temp = nn;
+            }
+            else
+            {
+                Node *nn = new Node;
+                nn->data = '-';
+                nn->next = NULL;
+                nn->prev = temp;
+                temp->next = nn;
+                temp = nn;
             }
         }
     }
-    void bookTicket()
-    {
-        int rno, seatno;
-        cout << "\nEnter row no : ";
-        cin >> rno;
-        cout << "\nEnter seat no : ";
-        cin >> seatno;
-        if (b[rno][seatno]->data == "Booked")
-        {
-            cout << "\nSeat is not vacant";
-        }
-        else
-        {
-            b[rno][seatno]->data = "Booked";
-            cout << "\nSeat booked";
-        }
-    }
-    void cancelTicket()
-    {
-        int rno, seatno;
-        cout << "\nEnter row no : ";
-        cin >> rno;
-        cout << "\nEnter seat no : ";
-        cin >> seatno;
-        if (b[rno][seatno]->data == "Booked")
-        {
-            b[rno][seatno]->data = "Vacant";
-            cout << "\nTicket booked";
-        }
-        else
-        {
+}
 
-            cout << "\nSeat was not booked";
-        }
-    }
-    void availableSeats()
+void Ticket::Book()
+{
+    int r, c, count = 0;
+    cout << "Enter Row & Column Number to Booked" << endl;
+    cin >> r >> c;
+
+    Node *temp = head[r];
+    while (count != c - 1)
     {
-        int seat = 0;
+        temp = temp->next;
+        count++;
+    }
+
+    if (temp->data == '-')
+    {
+        temp->data = 'B';
+        cout << "Booked Successfully" << endl;
+    }
+    else
+        cout << "Already Booked" << endl;
+}
+
+void Ticket::Cancel()
+{
+    int r, c, count = 0;
+    cout << "Enter Row & Column Number to Cancel Ticket" << endl;
+    cin >> r >> c;
+
+    Node *temp = head[r];
+    while (count != c - 1)
+    {
+        temp = temp->next;
+        count++;
+    }
+
+    if (temp->data == 'B')
+    {
+        temp->data = '-';
+        cout << "Cancel Successfully" << endl;
+    }
+    else
+        cout << "Already Vacant" << endl;
+}
+
+void Ticket::Display()
+{
+    for (int i = 1; i <= 15; i++)
+    {
         Node *temp;
-        for (int i = 0; i < 15; i++)
-        {
-            temp = b[i][0];
-            while (temp != NULL)
-            {
-
-                cout << "\nRow no : " << i << " seat no " << seat;
-
-                temp = temp->next;
-                seat++;
-            }
-        }
+        for (temp = head[i]; temp != NULL; temp = temp->next)
+            cout << temp->data << "   ";
+        cout << endl;
     }
-};
+}
+
 int main()
 {
-    Cinemax c;
-
-    int choice;
-    do
-    {
-        cout << "\n1.Book ticket ";
-        cout << "\n2.Cancel ticket";
-        cout << "\n3.See available seats";
-
-        cout << "\n4.Exit";
-        cout << "\nChoice : ";
-        cin >> choice;
-        switch (choice)
-        {
-        case 1:
-            c.bookTicket();
-            break;
-        case 2:
-            c.cancelTicket();
-            break;
-        case 3:
-            c.availableSeats();
-            break;
-        case 4:
-            choice = 0;
-            break;
-
-        default:
-            break;
-        }
-    } while (choice);
+    Ticket t;
+    t.Display();
+    t.Book();
+    t.Display();
+    t.Book();
+    t.Display();
+    t.Cancel();
+    t.Display();
 
     return 0;
 }
