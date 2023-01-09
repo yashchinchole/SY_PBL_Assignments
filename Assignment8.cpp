@@ -22,9 +22,8 @@ public:
     }
 };
 
-void CreateFile()
+void CreateFile(Employee e)
 {
-    Employee e;
     ofstream f("yash.dat", ios::binary | ios::app);
     f.write((char *)&e, sizeof(e));
     f.close();
@@ -50,7 +49,10 @@ void SearchFile()
     while (f.read((char *)&e, sizeof(e)))
     {
         if (e.id == i)
+        {
+            cout << "Found" << endl;
             flag = 1;
+        }
     }
     f.close();
 
@@ -114,7 +116,7 @@ int main()
 
     ReadFile();
     for (int i = 0; i < 3; i++)
-        CreateFile();
+        CreateFile(e[i]);
 
     ReadFile();
     SearchFile();
